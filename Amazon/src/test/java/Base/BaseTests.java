@@ -3,6 +3,7 @@ package Base;
 import Pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.ConfigReader;
@@ -27,5 +28,10 @@ public class BaseTests {
     public HomePage goHome(){
         driver.get(url);
         return new HomePage(driver);
+    }
+
+    @AfterClass
+    public void tearDown(){
+        driver.quit();
     }
 }
