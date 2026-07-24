@@ -1,10 +1,13 @@
 package Base;
 
-import org.Pages.HomePage;
+import Pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.ConfigReader;
+
+import java.time.Duration;
 
 public class BaseTests {
     private WebDriver driver;
@@ -12,13 +15,17 @@ public class BaseTests {
     String browser = config.getProperty("browser");
     String url = config.getProperty("app.url");
 
-    @Test
+
+    @BeforeClass
     public void setup(){
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         goHome();
     }
 
-    public void goHome(){
+    public HomePage goHome(){
         driver.get(url);
+        return new HomePage(driver);
     }
 }
