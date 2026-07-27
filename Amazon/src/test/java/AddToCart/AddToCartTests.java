@@ -1,10 +1,7 @@
 package AddToCart;
 
 import Base.BaseTests;
-import Pages.AddedToCartPage;
-import Pages.HomePage;
-import Pages.ProductPage;
-import Pages.SearchResultsPage;
+import Pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.ConfigReader;
@@ -23,9 +20,24 @@ public class AddToCartTests extends BaseTests {
         ProductPage newPage = page.getFirstProduct();
         AddedToCartPage addTocartPage = newPage.clickAddToCartBtn();
         Assert.assertEquals(addTocartPage.getConfirmationOfAddedProductToCart(),"Added to cart", "product not added");
+    }
+
+    @Test
+    public void testCartPage(){
+        HomePage homePage = goHome();
+        homePage.setSearchBar(product);
+        SearchResultsPage page = homePage.clickSearchBarBtn();
+
+
+        ProductPage newPage = page.getFirstProduct();
+        AddedToCartPage addTocartPage = newPage.clickAddToCartBtn();
+        CartPage cartPage = addTocartPage.clickCartNav();
+        Assert.assertEquals(cartPage.getQuantity(),"1","quantity not added");
+        Assert.assertTrue(cartPage.getPrice(),"price not visable");
 
 
 
     }
+
 
 }

@@ -11,6 +11,7 @@ public class ProductsPageTests extends BaseTests {
     ConfigReader config = new ConfigReader();
     String product = config.getProperty("laptop");
     String invaildProduct =  config.getProperty("InvalidProduct");
+    String productJava = config.getProperty("java");
 
     @Test
     public void testProductPageAndShowsRelatedProducts(){
@@ -36,6 +37,22 @@ public class ProductsPageTests extends BaseTests {
 
         String message = "No results for your search query.";
         Assert.assertEquals(searchPage.getInvalidProductMessage(),message,"Invalid message");
+    }
+
+    @Test
+    public void testCategorySelection(){
+        HomePage homePage = goHome();
+        homePage.clickSearchDropDownBooks();
+
+        homePage.setSearchBar(productJava);
+        SearchResultsPage searchPage = homePage.clickSearchBarBtn();
+        String text = String.format("results for \"%s\"", productJava);
+
+        System.out.println(searchPage.getRelatedProductText());
+        System.out.println(text);
+
+        Assert.assertTrue(searchPage.getRelatedProductText().contains(text));
+
     }
 
 
