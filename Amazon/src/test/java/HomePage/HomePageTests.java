@@ -18,4 +18,16 @@ public class HomePageTests extends BaseTests {
         Assert.assertTrue(homePage.isSearchBarDisplayed());
     }
 
+    @Test
+    public void testChangeLang() throws InterruptedException {
+        HomePage homePage = goHome();
+        homePage.hoverOverLangBar();
+        homePage.changeLang();
+        Thread.sleep(3000);
+        System.out.println("Current language :"+homePage.getCurrentLang());
+        Assert.assertEquals(homePage.getCurrentLang(),"TA","Language not change");
+
+    }
+
+
 }

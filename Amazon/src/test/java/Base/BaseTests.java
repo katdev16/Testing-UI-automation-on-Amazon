@@ -7,6 +7,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.ConfigReader;
+import utils.Log;
 
 import java.time.Duration;
 
@@ -21,6 +22,7 @@ public class BaseTests {
     public void setup(){
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Log.info("Loading WebDriver");
 
         goHome();
     }
